@@ -1,0 +1,71 @@
+{% load static %}
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if object %}Edit{% else %}Create{% endif %} Thread</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+        <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">{% if object %}Edit{% else %}Create{% endif %} Thread</h1>
+
+        {% if form.content.errors %}
+            <script>
+                Swal.fire({
+                    title: "ข้อผิดพลาด!",
+                    text: "{{ form.content.errors|join:'\n' }}",
+                    icon: "error",
+                    confirmButtonText: "ตกลง"
+                });
+            </script>
+        {% endif %}
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <div>
+                <label class="block text-gray-700 font-semibold">Title</label>
+                <div class="border border-gray-300 rounded p-2 focus:ring-2 focus:ring-blue-400">
+                    {{ form.title }}
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-semibold">Content</label>
+                <div class="border border-gray-300 rounded p-2 focus:ring-2 focus:ring-blue-400">
+                    {{ form.content }}
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-semibold">Hashtags</label>
+                <input type="text" name="hashtags" id="hashtags" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400" placeholder="ใส่ Hashtag คั่นด้วย , เช่น #food, #travel">
+            </div>
+
+            <div class="flex justify-between items-center">
+                <a href="#" id="backLink" class="text-blue-500 hover:underline">Back</a>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">{% if object %}Update{% else %}Create{% endif %}</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var backLink = document.getElementById('backLink');
+            var referrer = document.referrer;
+
+            if (referrer.includes('home')) {
+                backLink.href = "{% url 'home' %}";
+            } else if (referrer.includes('profile')) {
+                backLink.href = "{% url 'profile' %}";
+            } else {
+                backLink.href = "{% url 'thread_list' %}";
+            }
+        });
+    </script>
+</body>
+</html>
