@@ -20,7 +20,7 @@
 * cd ST-DSSI-68
 
 ##### 5. สร้าง virsual environment โดยใช้คำสั่ง
-* python -m venv env
+* python -m venv venv
 * venv\Scripts\activate
 
 ##### 6. ติดตั้ง python dependencies
