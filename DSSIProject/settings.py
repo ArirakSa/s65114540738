@@ -100,10 +100,13 @@ DATABASES = {
         'NAME': 'dssi-prj',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',  # หรือที่อยู่ของเซิร์ฟเวอร์ MySQL
+        #'HOST': '127.0.0.1',  # หรือที่อยู่ของเซิร์ฟเวอร์ MySQL
+        'HOST': 'db',
         'PORT': '3306',  # พอร์ตเริ่มต้นของ MySQL
         'OPTIONS': {
-            'charset': 'utf8mb4',}
+            'charset': 'utf8mb4',
+            'ssl': {''},
+        },
     }
 }
 
