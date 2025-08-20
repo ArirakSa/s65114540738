@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
-
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-d$k2=y2th4=cmgl!ad#p^q@75(f99l9(mv_(*mm6^+css0%4!t"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 
 LOGIN_URL = '/admin-signin/'
 
@@ -96,17 +98,19 @@ AUTH_USER_MODEL = 'talkw.CustomUser'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dssi-prj',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': 'dssiprjuser',
+        'PASSWORD': '123456',
+        'HOST': config('DB_HOST', default='202.28.49.122'),
+        'PORT': config('DB_PORT', default='5432'),
         #'HOST': '127.0.0.1',  # หรือที่อยู่ของเซิร์ฟเวอร์ MySQL
-        'HOST': 'db',
-        'PORT': '3306',  # พอร์ตเริ่มต้นของ MySQL
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-            'ssl': {''},
-        },
+       # 'HOST': 'db',
+        #'PORT': '3306',  # พอร์ตเริ่มต้นของ MySQL
+        #'OPTIONS': {
+         #   'charset': 'utf8mb4',
+        #    'ssl': {''},
+       # },
     }
 }
 
@@ -162,3 +166,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
