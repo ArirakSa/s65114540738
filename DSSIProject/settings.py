@@ -28,8 +28,9 @@ SECRET_KEY = "django-insecure-d$k2=y2th4=cmgl!ad#p^q@75(f99l9(mv_(*mm6^+css0%4!t
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 #ALLOWED_HOSTS = []
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS", default="localhost").split(",")
 
+ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS", default="localhost").split(",")
 
 LOGIN_URL = '/admin-signin/'
 
