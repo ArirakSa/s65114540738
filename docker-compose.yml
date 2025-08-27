@@ -4,29 +4,31 @@ services:
   web:
     build: .
     ports:
-      - "10738:8000"
+      - "10738:8000"  # host:container → เข้าเว็บได้ที่ localhost:10323
     volumes:
       - .:/app
-      - /app/theme/static_src/node_modules
     depends_on:
       - db
     restart: always
+    env_file:
+      - .env
     command: >
       sh -c "
       python manage.py migrate &&
-      python manage.py runserver 0.0.0.0:8000
+      gunicorn DSSIProject.wsgi:application --bind 0.0.0.0:8000 --workers 3
       "
 
   db:
-    image: mysql:8.0
+    image: postgres:16
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: dssi-prj
-    ports:
-      - "20738:3306"
+      POSTGRES_DB: dssi-prj
+      POSTGRES_USER: dssiprjuser
+      POSTGRES_PASSWORD: 123456
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "20738:5432"   # host:container → PostgreSQL ออกพอร์ต 20323
 
 volumes:
-  mysql_data:
+  postgres_data:

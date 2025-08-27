@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -104,7 +105,7 @@ DATABASES = {
         'NAME': 'dssi-prj',
         'USER': 'dssiprjuser',
         'PASSWORD': '123456',
-        'HOST': config('DB_HOST', default='202.28.49.122'),
+        'HOST': config('DB_HOST'),
         'PORT': config('DB_PORT', default='5432'),
         #'HOST': '127.0.0.1',  # หรือที่อยู่ของเซิร์ฟเวอร์ MySQL
        # 'HOST': 'db',
@@ -151,10 +152,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static"
+    BASE_DIR / "static",
 ]
+
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # In settings.py
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 365  # 1 year

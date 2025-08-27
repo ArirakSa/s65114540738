@@ -1,8 +1,8 @@
 FROM python:3.12
 
-# ติดตั้ง Node.js, npm และ mysql client
+# ติดตั้ง Node.js, npm 
 RUN apt-get update && \
-    apt-get install -y curl default-mysql-client && \
+    apt-get install -y curl && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
     npm install -g npm@latest && \
