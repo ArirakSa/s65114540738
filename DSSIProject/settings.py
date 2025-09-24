@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
+import environ
+
+env = environ.Env()
+environ.Env.read_env()  # loads environment variables from .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +29,18 @@ SECRET_KEY = "django-insecure-d$k2=y2th4=cmgl!ad#p^q@75(f99l9(mv_(*mm6^+css0%4!t
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = config('DEBUG')
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS", default="localhost").split(",")
+# อนุญาตให้เว็บเข้าถึงจาก host ไหน
+ALLOWED_HOSTS = ['*']
+# อนุญาตให้ POST/form request มาจากเว็บ/port ไหน
+CSRF_TRUSTED_ORIGINS = env.list(
+    "DJANGO_CSRF_TRUSTED_ORIGINS",
+    default=["http://localhost:8000"],
+)
 
 LOGIN_URL = '/admin-signin/'
+
 
 
 # Application definition
@@ -45,7 +55,6 @@ INSTALLED_APPS = [
     'talkw.apps.TalkwConfig',
     'tailwind',
     'theme',
-    'django_browser_reload',
 ]
 
 MIDDLEWARE = [
@@ -57,8 +66,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
+
 
 ROOT_URLCONF = "DSSIProject.urls"
 
@@ -149,8 +158,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+# Prefix (รหัสนศ.)
+FORCE_SCRIPT_NAME = '/s65114540738' 
 
-STATIC_URL = "/static/"
+STATIC_URL = FORCE_SCRIPT_NAME + "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
@@ -165,7 +176,6 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 365  # 1 year
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Don't expire session when the browser is closed
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
-CSRF_COOKIE_SECURE = True  # ใช้เมื่อมีการเชื่อมต่อผ่าน HTTPS
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -177,9 +187,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-# Prefix (รหัสนศ.)
-FORCE_SCRIPT_NAME = '/s65114540738'
 
-# Static files
-STATIC_URL = FORCE_SCRIPT_NAME + '/static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
+

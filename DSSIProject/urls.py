@@ -20,5 +20,4 @@ from django.urls import path, include
 urlpatterns = [
     path("admin-dj/", admin.site.urls),
     path("", include("talkw.urls")),
-    path("__reload__/", include("django_browser_reload.urls")),
 ]

@@ -179,7 +179,7 @@
                 const csrfToken = "{{ csrf_token }}";
                 formData.append("csrfmiddlewaretoken", csrfToken);
 
-                return fetch(`/report-thread/${threadId}/`, {  // ปรับ URL ให้ถูกต้อง
+                return fetch(`/s65114540738/report-thread/${threadId}/`, {  // ปรับ URL ให้ถูกต้อง
                     method: "POST",
                     body: formData,
                     headers: {
@@ -231,7 +231,7 @@ function openCommentModal(threadId) {
             formData.append("csrfmiddlewaretoken", csrfToken);
 
             // ใช้ fetch เพื่อส่งคอมเมนต์
-            return fetch(`/comment/${threadId}/`, {
+            return fetch(`/s65114540738/comment/${threadId}/`, {
                 method: "POST",
                 body: formData,
                 headers: {
@@ -282,7 +282,7 @@ function openCommentModal(threadId) {
             const formData = new FormData();
             formData.append("csrfmiddlewaretoken", "{{ csrf_token }}");
 
-            fetch(`/thread/${threadId}/delete/`, {
+            fetch(`/s65114540738/thread/${threadId}/delete/`, {
                 method: "POST",
                 body: formData
             })

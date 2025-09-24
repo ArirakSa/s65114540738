@@ -151,7 +151,7 @@
                 const csrfToken = "{{ csrf_token }}";
                 formData.append("csrfmiddlewaretoken", csrfToken);
 
-                return fetch(`/report-thread/${threadId}/`, {
+                return fetch(`/s65114540738/report-thread/${threadId}/`, {
                     method: "POST",
                     body: formData,
                     headers: {
@@ -199,7 +199,7 @@
 
                 formData.append("csrfmiddlewaretoken", csrfToken);
 
-                return fetch(`/thread/${threadId}/comment/`, {
+                return fetch(`/s65114540738/thread/${threadId}/comment/`, {
                     method: "POST",
                     body: formData,
                     headers: {
@@ -234,7 +234,7 @@
                 const formData = new FormData();
                 formData.append("csrfmiddlewaretoken", "{{ csrf_token }}");
 
-                fetch(`/thread/${threadId}/delete/`, {
+                fetch(`/s65114540738/thread/${threadId}/delete/`, {
                     method: "POST",
                     body: formData
                 })

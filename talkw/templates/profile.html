@@ -204,7 +204,7 @@
                 const csrfToken = "{{ csrf_token }}";
                 formData.append("csrfmiddlewaretoken", csrfToken);
 
-                return fetch(`/report-thread/${threadId}/`, {  // ปรับ URL ให้ถูกต้อง
+                return fetch(`/s65114540738/report-thread/${threadId}/`, {  // ปรับ URL ให้ถูกต้อง
                     method: "POST",
                     body: formData,
                     headers: {
@@ -253,7 +253,7 @@
 
                 formData.append("csrfmiddlewaretoken", csrfToken); // เพิ่ม CSRF token
 
-                return fetch(`/thread/${threadId}/comment/`, {  // URL ให้ถูกต้อง
+                return fetch(`/s65114540738/thread/${threadId}/comment/`, {  // URL ให้ถูกต้อง
                     method: "POST",
                     body: formData,
                     headers: {
@@ -284,7 +284,7 @@
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`/thread/${threadId}/delete/`, {
+            fetch(`/s65114540738/thread/${threadId}/delete/`, {
                 method: "POST",
                 headers: {
                     "X-CSRFToken": "{{ csrf_token }}"

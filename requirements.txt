@@ -7,5 +7,5 @@ requests
 python-decouple
 psycopg2-binary==2.9.10
 gunicorn==23.0.0
-
+django-environ
 whitenoise==6.9.0
