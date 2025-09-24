@@ -25,11 +25,9 @@ SECRET_KEY = "django-insecure-d$k2=y2th4=cmgl!ad#p^q@75(f99l9(mv_(*mm6^+css0%4!t
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', cast=bool)
 
 #ALLOWED_HOSTS = []
-ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS", default="localhost").split(",")
-
 ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS", default="localhost").split(",")
 
 LOGIN_URL = '/admin-signin/'
@@ -165,6 +163,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # In settings.py
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 365  # 1 year
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Don't expire session when the browser is closed
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 CSRF_COOKIE_SECURE = True  # ใช้เมื่อมีการเชื่อมต่อผ่าน HTTPS
 
@@ -176,3 +175,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+# Prefix (รหัสนศ.)
+FORCE_SCRIPT_NAME = '/s65114540738'
+
+# Static files
+STATIC_URL = FORCE_SCRIPT_NAME + '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"

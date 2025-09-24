@@ -25,3 +25,5 @@ RUN npm install
 # คัดลอก source code ที่เหลือ
 WORKDIR /app
 COPY . .
+
+EXPOSE 8000
