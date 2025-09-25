@@ -67,7 +67,7 @@ class EditProfileForm(forms.ModelForm):
         required=False
     )
     profile_picture = forms.ImageField(
-        widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+        widget=forms.FileInput(attrs={'class': 'form-control-file'}),
         required=False  # ไม่บังคับให้ต้องอัปโหลดรูป
     )
 

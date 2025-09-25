@@ -54,6 +54,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'talkw.apps.TalkwConfig',
+    
+    'cloudinary',
+    'cloudinary_storage',
+
     'tailwind',
     'theme',
 ]
