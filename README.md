@@ -16,9 +16,9 @@
 <br>ทำการสร้างฐานข้อมูล ใน  MySQL workbench ชื่อ dssi-prj
 
 ##### 4. ทำการ Clone project  โดยใช้คำสั่ง
-* git clone https://github.com/ArirakSa/ST-DSSI-68/
-* cd ST-DSSI-68
-
+* git clone https://github.com/ArirakSa/s65114540738/
+* cd s65114540738
+* 
 ##### 5. สร้าง virsual environment โดยใช้คำสั่ง
 * python -m venv venv
 * venv\Scripts\activate
