@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from decouple import config
 import environ
+import cloudinary
 
 env = environ.Env()
 environ.Env.read_env()  # loads environment variables from .env file
@@ -168,6 +169,22 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+# Media settings (Cloudinary)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUDINARY_NAME'),
+    'API_KEY': env('CLOUDINARY_KEY'),
+    'API_SECRET': env('CLOUDINARY_SECRET'),
+}
+
+# Storage config (Django 5.1+)
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
